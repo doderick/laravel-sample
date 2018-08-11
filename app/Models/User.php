@@ -26,4 +26,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * 用户获取头像的方法
+     *
+     * @param integer $size 用户头像的尺寸
+     * @return 用户头像的链接
+     */
+    public function gravatar($size = '100')
+    {
+        $hash = md5(strtolower(trim($this->attributes['email'])));
+        return "https://s.gravatar.com/avatar/{$hash}?s={$size}";
+    }
 }

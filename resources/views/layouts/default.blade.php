@@ -14,6 +14,9 @@
     <!-- 引入主体部分 -->
     <div class="container">
         <div class="col-md-10 col-md-offset-1">
+            <!-- 引入消息视图 -->
+            @include('shared._message')
+
             @yield('content')
         </div>
     </div>

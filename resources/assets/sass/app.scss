@@ -61,6 +61,13 @@ section {
     }
 }
 
+#logout {
+    cursor: default;
+    &:hover {
+        background-color: transparent;
+    }
+}
+
 /* footer */
 
 footer {
@@ -102,4 +109,49 @@ footer {
         border-top: 1px solid #eaeaea;
         padding-top: 5px;
     }
+}
+
+/* user_info */
+
+section.user_info {
+    padding-bottom: 10px;
+    margin-top: 20px;
+    text-align: center;
+    .gravatar {
+        float: none;
+        max-width: 70px;
+    }
+    h1 {
+        font-size: 1.4em;
+        letter-spacing: -1px;
+        margin-top: 15px;
+        margin-bottom: 3px;
+    }
+    h2 {
+        margin-top: 10px;
+        margin-bottom: 3px;
+        a {
+            color: #444;
+            font-size: 0.9em;
+            &:hover {
+                color: #222;
+            }
+        }
+    }
+}
+
+.gravatar {
+    border-radius: 50%;
+    max-width: 50px;
+}
+
+/* form */
+
+.panel {
+    margin-top: 50px;
+}
+input {
+    border: 1px solid #bbb;
+    margin-bottom: 15px;
+    height: auto !important;
 }
