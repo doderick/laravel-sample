@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Auth;
+use Mail;
 
 class UsersController extends Controller
 {
@@ -39,8 +41,11 @@ class UsersController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-        // 注册成功之后给出欢迎语
-        session()->flash('success', '您已成功注册，您即将在这里开始一段新的旅程～');
+        // 发送激活邮件
+        $this->sendActivateEmailTo($user);
+
+        // 提示用户查收激活邮件
+        session()->flash('info', '激活邮件已发送到您的邮箱上，请注意查收～');
 
         // 重定向至应用首页
         return redirect()->route('home');
@@ -55,5 +60,45 @@ class UsersController extends Controller
     public function show(User $user)
     {
         return view('users.show', compact('user'));
+    }
+
+    /**
+     * 发送激活邮件的方法
+     *
+     * @param $user 新注册的用户
+     * @return void
+     */
+    public function sendActivateEmailTo($user)
+    {
+        $view = 'emails.activate';
+        $data = compact('user');
+        $to = $user->email;
+        $subject = "感谢您注册Sample Ⅴ！请确认您的邮箱地址。";
+
+        Mail::send($view, $data, function($message) use ($to, $subject) {
+            $message->to($to)->subject($subject);
+        });
+    }
+
+    /**
+     * 用户激活的方法
+     *
+     * @param integer $id   执行激活操作的用户的id
+     * @param string $token 执行激活操作的用户的激活令牌
+     * @return 激活用户的主页
+     */
+    public function activate($id, $token)
+    {
+        $user = User::find($id);
+        if ($user->activation_token === $token) {
+            $user->is_activated = true;
+            $user->activation_token = null;
+            $user->save();
+        }
+
+        // 用户激活后自动登录
+        Auth::login($user);
+        session()->flash('success', '恭喜您，您的账号已经激活。');
+        return redirect()->route('users.show', compact('user'));
     }
 }

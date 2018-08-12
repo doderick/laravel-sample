@@ -33,8 +33,15 @@ class SessionsController extends Controller
 
         // 将用户填写的登录请求信息与数据库中的数据进行比对
         if (Auth::attempt($credentials, $request->has('remember_me'))) {
-            session()->flash('success', Auth::user()->name.'，欢迎回来！');
-            return redirect()->intended(route('users.show', [Auth::user()]));
+            // 用户激活状态验证
+            if (Auth::user()->is_activated) {
+                session()->flash('success', Auth::user()->name.'，欢迎回来！');
+                return redirect()->intended(route('users.show', [Auth::user()]));
+            } else {
+                Auth::logout();
+                session()->flash('warning', '您的账号尚未激活，请检查邮箱中的激活邮件进行激活。');
+                return redirect('home');
+            }
         } else {
             session()->flash('danger', '抱歉，您的邮箱与密码不匹配，请重试～');
             return redirect()->back()->withInput($request->except('password'));

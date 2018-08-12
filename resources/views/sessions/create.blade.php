@@ -14,12 +14,12 @@
                 <form action="{{ route('login') }}" method="POST">
                     {{ csrf_field() }}
 
-                    <div class="form-group">
-                        <label for="email">邮箱：</label>
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <label for="email" class="control-label">邮箱：</label>
                         <input type="text" name="email" class="form-control" value="{{ old('email') }}" placeholder="请输入邮箱地址" autofocus>
                     </div>
-                    <div class="form-group">
-                        <label for="password">密码 (<a href="#"> 忘记密码？</a>)：</label>
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label for="password" class="control-label">密码 (<a href="{{ route('password.request') }}"> 忘记密码？</a>)：</label>
                         <input type="password" name="password" class="form-control" value="{{ old('password') }}" placeholder="请输入密码">
                     </div>
                     <div class="checkbox">
