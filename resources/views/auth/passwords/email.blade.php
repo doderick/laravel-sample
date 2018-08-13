@@ -15,7 +15,7 @@
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <label for="email" class="control-label">邮箱地址：</label>
+                        <label for="email" class="control-label">邮箱：</label>
                         <input type="text" name="email" class="form-control" value="{{ old('email') }}" placeholder="请输入您的邮箱地址" autofocus>
                     </div>
 

@@ -5,7 +5,7 @@
                 <nav>
                     @if (Auth::check())
                         <ul class="nav navbar-nav navbar-left">
-                            <li><a href="#">用户列表</a></li>
+                            <li><a href="{{ route('users.index') }}">用户列表</a></li>
                         </ul>
                     @endif
                     <ul class="nav navbar-nav navbar-right">
@@ -17,7 +17,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ route('users.show', Auth::user()->id) }}">个人中心</a></li>
-                                    <li><a href="#">编辑资料</a></li>
+                                    <li><a href="{{ route('users.edit', Auth::user()->id) }}">编辑资料</a></li>
                                     <li class="divider"></li>
                                     <li>
                                         <a href="#" id="logout">

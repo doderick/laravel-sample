@@ -8,6 +8,17 @@ use Auth;
 class SessionsController extends Controller
 {
     /**
+     * 构造中间件过滤http请求
+     */
+    public function __construct()
+    {
+        // 只允许only之后的动作被游客访问
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
+    }
+
+    /**
      * 创建登录表单的方法
      *
      * @return 登录表单视图
