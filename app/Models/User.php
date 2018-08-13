@@ -64,4 +64,26 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPassword($token));
     }
+
+    /**
+     * 处理用户和动态之间的关联
+     * 一个用户可以拥有多条动态
+     *
+     * @return void
+     */
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
+
+    /**
+     * 取出用户所有动态的方法
+     *
+     * @return 用户的所有动态，按发布时间倒序排列
+     */
+    public function feed()
+    {
+        return $this->statuses()
+                    ->orderBy('created_at', 'desc');
+    }
 }

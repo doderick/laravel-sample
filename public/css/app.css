@@ -8512,10 +8512,18 @@ section.user_info h2 a:hover {
   margin-top: 50px;
 }
 
-input {
+input,
+textarea {
   border: 1px solid #bbb;
   margin-bottom: 15px;
+}
+
+input {
   height: auto !important;
+}
+
+textarea {
+  resize: vertical;
 }
 
 /* users_index */
@@ -8536,7 +8544,7 @@ input {
   margin-left: 10px;
 }
 
-.delete-btn {
+.user-delete-btn {
   float: right;
   position: relative;
   right: 0;
@@ -8558,5 +8566,52 @@ input {
   color: #777;
   font-style: italic;
   font-size: 0.8em;
+}
+
+/* statuses */
+
+.statuses {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.statuses li {
+  padding: 10px 0;
+  border-top: 1px solid #eaeaea;
+  position: relative;
+}
+
+.statuses .user {
+  margin-top: 5em;
+  padding-top: 0;
+}
+
+.statuses .content {
+  display: block;
+  margin-left: 60px;
+  word-break: break-word;
+}
+
+.statuses .content img {
+  display: block;
+  padding: 5px 0;
+}
+
+.statuses .timestamp {
+  color: #777777;
+  display: block;
+  margin-left: 60px;
+}
+
+.statuses .gravatar {
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.statuses form button.status-delete-btn {
+  position: absolute;
+  right: 0;
+  top: 10px;
 }
 

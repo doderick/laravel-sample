@@ -20,7 +20,7 @@ class UserPolicy
     }
 
     /**
-     * 用户删除策略的update方法
+     * 用户授权策略的update方法
      *
      * @param User $currentUser 当前登录的用户实例
      * @param User $user        需要edit，update的用户实例

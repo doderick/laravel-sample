@@ -114,7 +114,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(20);
+        $users = User::where('is_activated', 1)
+                        ->orderBy('id', 'asc')
+                        ->paginate(20);
         return view('users.index', compact('users'));
     }
 
@@ -126,7 +128,11 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        // 添加动态的显示
+        $statuses = $user->statuses()
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(10);
+        return view('users.show', compact('user', 'statuses'));
     }
 
     /**
@@ -201,6 +207,7 @@ class UsersController extends Controller
         $this->authorize('destroy', $user);
 
         $user->delete();
+        $user->statuses()->delete();
         session()->flash('success', '删除用户操作执行成功！');
         return redirect()->back();
     }

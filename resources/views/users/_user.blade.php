@@ -8,7 +8,7 @@
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
 
-            <button type="submit" class="btn btn-sm btn-danger delete-btn" onclick="return function(){
+            <button type="submit" class="btn btn-sm btn-danger user-delete-btn" onclick="return function(){
                 return confirm('确定删除这个用户吗？')}()">删除</button>
 
         </form>
