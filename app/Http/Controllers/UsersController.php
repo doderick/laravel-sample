@@ -16,7 +16,7 @@ class UsersController extends Controller
     {
         // 允许except之后的动作被游客访问
         $this->middleware('auth', [
-            'except' => ['create', 'store']
+            'except' => ['create', 'store', 'show', 'activate']
         ]);
 
         // 只允许only之后的动作被游客访问
@@ -46,7 +46,7 @@ class UsersController extends Controller
         // 对用户填写注册信息进行合法性验证
         $this->validate($request, [
             'name'     => 'required|max:50',
-            'email'    => 'required|email|max:255',
+            'email'    => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6'
         ]);
 
@@ -173,14 +173,14 @@ class UsersController extends Controller
         $user->update($data);
 
         // 对用户的修改请求及结果进行判断
-        if (!empty($data['name'])) {
-            $info = 'success';
-            $msg  = '您的用户名已修改成功！';
-        } elseif (!empty($data['password'])) {
+        if (!empty($data['password'])) {
             Auth::logout();
             $info = 'success';
             $msg  = '您的密码已修改成功，请重新登录！';
-        } elseif (!$user->can_rename && !empty($request->name && $request !== $user->name)) {
+        } elseif (!empty($data['name'])) {
+            $info = 'success';
+            $msg  = '您的用户名已修改成功！';
+        } elseif (!$user->can_rename && !empty($request->name) && $request->name !== $user->name) {
             $info = 'warning';
             $msg  = '您的用户名未能修改，原因是您曾经修改过用户名！';
         } else {
@@ -210,5 +210,35 @@ class UsersController extends Controller
         $user->statuses()->delete();
         session()->flash('success', '删除用户操作执行成功！');
         return redirect()->back();
+    }
+
+    /**
+     * 显示关注的人的列表的方法
+     *
+     * @param User $user 需要读取关注列表的用户
+     * @return 关注列表前端视图
+     */
+    public function followings(User $user)
+    {
+        $title = '关注列表';
+        $users = $user->followings()
+                        ->orderBy('id', 'asc')
+                        ->paginate(20);
+        return view('users.show_follow', compact('users', 'title'));
+    }
+
+    /**
+     * 显示粉丝列表的方法
+     *
+     * @param User $user 需要读取粉丝列表的人的用户
+     * @return 关注列表前端视图
+     */
+    public function followers(User $user)
+    {
+        $title = '粉丝列表';
+        $users = $user->followers()
+                        ->orderBy('id', 'asc')
+                        ->paginate(20);
+        return view('users.show_follow', compact('users', 'title'));
     }
 }

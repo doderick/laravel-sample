@@ -43,3 +43,11 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 // 动态资源相关路由
 Route::resource('statuses', 'StatusesController', ['only' => ['store', 'destroy']]);
+
+// 显示关注的人及粉丝列表视图的相关路由
+Route::get('users/{user}/followings', 'UsersController@followings')->name('users.followings');
+Route::get('users/{user}/followers', 'UsersController@followers')->name('users.followers');
+
+// 关注与取消关注相关路由
+Route::post('users/followers/{user}', 'FollowersController@store')->name('followers.store');
+Route::delete('users/followers/{user}', 'FollowersController@destroy')->name('followers.destroy');

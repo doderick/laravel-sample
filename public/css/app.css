@@ -8468,6 +8468,22 @@ footer .overline {
 
 /* user_info */
 
+aside section {
+  padding: 10px 0;
+  margin-top: 20px;
+}
+
+aside section:first-child {
+  border: 0;
+  padding-top: 0;
+}
+
+aside section span {
+  display: block;
+  margin-bottom: 3px;
+  line-height: 1;
+}
+
 section.user_info {
   padding-bottom: 10px;
   margin-top: 20px;
@@ -8506,6 +8522,54 @@ section.user_info h2 a:hover {
   float: left;
 }
 
+.stats {
+  overflow: auto;
+  margin-top: 0;
+  padding: 0;
+}
+
+.stats a {
+  float: left;
+  padding: 0 10px;
+  text-align: center;
+  width: 33.3%;
+  border-left: 1px solid #eeeeee;
+  color: gray;
+}
+
+.stats a:first-child {
+  padding-left: 0;
+  border: 0;
+}
+
+.stats a:hover {
+  text-decoration: none;
+  color: #337ab7;
+}
+
+.stats span {
+  display: block;
+  font-size: 1.2em;
+  color: black;
+}
+
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+}
+
+.user_avatars .gravatar {
+  margin: 1px 1px;
+}
+
+.user_avatars a {
+  padding: 0;
+}
+
+.users.follow {
+  padding: 0;
+}
+
 /* form */
 
 .panel {
@@ -8524,6 +8588,12 @@ input {
 
 textarea {
   resize: vertical;
+}
+
+#follow_form button {
+  margin: 0 auto;
+  display: block;
+  margin-top: 25px;
 }
 
 /* users_index */
@@ -8613,5 +8683,14 @@ textarea {
   position: absolute;
   right: 0;
   top: 10px;
+}
+
+aside textarea {
+  height: 100px;
+  margin-bottom: 5px;
+}
+
+.status_form {
+  margin-top: 20px;
 }
 
