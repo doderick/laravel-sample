@@ -7,7 +7,7 @@
     <title>注册激活邮件</title>
 </head>
 <body>
-    <h1>感谢您在 Sample Ⅴ 注册</h1>
+    <h1>感谢您在 Sample 注册</h1>
     <p>
         请点击下面的链接完成账户激活：
         <a href="{{ route('activate_email', [$user->id, $user->activation_token]) }}">

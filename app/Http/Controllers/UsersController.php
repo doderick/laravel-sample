@@ -78,7 +78,7 @@ class UsersController extends Controller
         $view = 'emails.activate';
         $data = compact('user');
         $to = $user->email;
-        $subject = "感谢您注册Sample Ⅴ！请确认您的邮箱地址。";
+        $subject = "感谢您注册Sample！请确认您的邮箱地址。";
 
         Mail::send($view, $data, function($message) use ($to, $subject) {
             $message->to($to)->subject($subject);

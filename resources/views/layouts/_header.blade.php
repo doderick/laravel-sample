@@ -1,7 +1,7 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
         <div class="container">
             <div class="col-md-10 col-md-offset-1">
-                <a href="{{ route('home') }}" id="logo">Sample Ⅴ</a>
+                <a href="{{ route('home') }}" id="logo">Sample</a>
                 <nav>
                     @if (Auth::check())
                         <ul class="nav navbar-nav navbar-left">

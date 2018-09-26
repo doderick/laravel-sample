@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/app.css">
-    <title>@yield('title', 'Sample Ⅴ') - Laravel 新手教程第五遍</title>
+    <title>@yield('title', 'Sample') - Laravel 新手教程</title>
 </head>
 <body>
     <!-- 引入header -->

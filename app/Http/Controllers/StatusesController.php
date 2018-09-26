@@ -44,7 +44,7 @@ class StatusesController extends Controller
     public function destroy(Status $status)
     {
         $this->authorize('destroy', $status);
-        $status->delete();
+        //$status->delete();
         session()->flash('success', '动态已被成功删除！');
         return redirect()->back();
     }
