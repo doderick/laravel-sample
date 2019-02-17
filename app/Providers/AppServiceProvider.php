@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale('zh');
 
         \App\Models\User::observe(\App\Observers\UserObserver::class);
+        \URL::forceScheme('https');
     }
 
     /**
